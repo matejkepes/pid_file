@@ -14,7 +14,7 @@ defmodule PidFile.Worker do
     Process.flag(:trap_exit, true)
     file =
       case opts[:file] do
-        file when is_binary(file) -> file
+        file when is_binary(file) or is_list(file) -> file
         nonfile -> throw {:unsupport_option, __MODULE__, :init, :file, nonfile, opts}
       end
     cleanup_pid(file)
